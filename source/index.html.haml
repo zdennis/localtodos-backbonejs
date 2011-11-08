@@ -1,0 +1,41 @@
+- content_for :head do
+  %title The Middleman!
+  = javascript_include_tag :jquery, :underscore, :backbone, :'backbone-local-storage', :app 
+
+
+%script#item-template{:type => "text/backbone-template"}
+  <% if(done) { %>
+  %input.check{type: "checkbox", checked: "checked"}
+  <% } else { %>
+  %input.check{type: "checkbox"}
+  <% } %>
+  <%= text %>
+  
+%script#stats-template{:type => "text/backbone-template"}
+  .remaining
+    %span.count
+      <%= remaining %>
+    remaining
+
+  .done
+    %span.count
+      <%= done %>
+    done
+
+  
+#todoapp
+  .title
+    %header Todos
+    
+  .content
+    #create-todo
+      %input#new-todo{:placeholder => "What needs to be done?", :type => "text"}/
+      %span.ui-tooltip-top Press Enter to create this task
+    #todos
+      %ul#todo-list
+      
+  #todo-stats
+  
+%ul#instructions
+  %li Double-click to edit a todo.
+  %li Click, hold and drag to reorder your todos.
