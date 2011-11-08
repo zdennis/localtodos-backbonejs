@@ -4,12 +4,17 @@
 
 
 %script#item-template{:type => "text/backbone-template"}
-  <% if(done) { %>
-  %input.check{type: "checkbox", checked: "checked"}
-  <% } else { %>
-  %input.check{type: "checkbox"}
-  <% } %>
-  <%= text %>
+  %article
+    <% if(done) { %>
+    %input.check{type: "checkbox", checked: "checked"}
+    <% } else { %>
+    %input.check{type: "checkbox"}
+    <% } %>
+    %span.todo-text
+      <%= text %>
+  %form
+    <input type="text" value="<%= text %>" placeholder="What needs to be done?" class="todo-input"/>
+    
   
 %script#stats-template{:type => "text/backbone-template"}
   .remaining
@@ -29,7 +34,7 @@
     
   .content
     #create-todo
-      %input#new-todo{:placeholder => "What needs to be done?", :type => "text"}/
+      %input#new-todo{:placeholder => "What needs to be done?", :type => "text"}
       %span.ui-tooltip-top Press Enter to create this task
     #todos
       %ul#todo-list

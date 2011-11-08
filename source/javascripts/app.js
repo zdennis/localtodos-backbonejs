@@ -43,7 +43,7 @@ $(function(){
     
     events: {
       "click .check"               : "toggleDone",
-      "dblclick div.todo-text"     : "edit",
+      "dblclick .todo-text"        : "edit",
       "click span.todo-destroy"    : "clear",
       "keypress .todo-input"       : "updateOnEnter"
     },
@@ -81,7 +81,10 @@ $(function(){
     },
     
     updateOnEnter: function(e){
-      if(e.keyCode == 13) this.close();
+      if(e.keyCode == 13) {
+        this.close();
+        return false;
+      }
     },
     
     remove: function(){
