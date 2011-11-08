@@ -1,0 +1,1 @@
+This is an exploration in backbone.js, backbone-local-storage, underscore.js, and jquery.
