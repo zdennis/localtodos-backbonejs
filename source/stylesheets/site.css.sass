@@ -84,11 +84,36 @@ a
       article
         padding: 0 10px 10px 10px
         
+        input[type=checkbox]
+          position: relative
+          top: -2px
+        
         .todo-text
           display: inline-block
           min-width: 100px
           min-height: 20px
-      
+          
+        &:hover
+          a.destroy
+            @include background(linear-gradient(#DDDDDD, #CCCCCC))
+            visibility: visible
+          
+        a.destroy
+          @include border-radius(3px)
+          color: white
+          display: block
+          float: right
+          font-size: 11px
+          margin-left: 5px
+          padding: 4px
+          position: relative
+          text-decoration: none
+          top: 3px
+          visibility: hidden
+          
+          &:hover
+            @include background(linear-gradient(#DD0000, #AA3333))
+
       form
         display: none
           

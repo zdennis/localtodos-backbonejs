@@ -2,19 +2,20 @@
   %title The Middleman!
   = javascript_include_tag :jquery, :underscore, :backbone, :'backbone-local-storage', :app 
 
-
 %script#item-template{:type => "text/backbone-template"}
-  %article
+  %article{class: "<%= done ? 'done' : '' %>"}
     <% if(done) { %>
     %input.check{type: "checkbox", checked: "checked"}
     <% } else { %>
     %input.check{type: "checkbox"}
     <% } %>
-    %span.todo-text
+    %div.todo-text
       <%= text %>
+    %a.destroy{href: "#destroy-todo"}
+      remove
+
   %form
     <input type="text" value="<%= text %>" placeholder="What needs to be done?" class="todo-input"/>
-    
   
 %script#stats-template{:type => "text/backbone-template"}
   .remaining

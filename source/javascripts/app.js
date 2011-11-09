@@ -44,7 +44,7 @@ $(function(){
     events: {
       "click .check"               : "toggleDone",
       "dblclick .todo-text"        : "edit",
-      "click span.todo-destroy"    : "clear",
+      "click a.destroy"            : "clear",
       "keypress .todo-input"       : "updateOnEnter"
     },
     
