@@ -1,3 +1,5 @@
+require 'ruby-debug'
+
 ### 
 # Compass
 ###
@@ -14,6 +16,25 @@
 ###
 # Haml
 ###
+
+Haml::Template.options[:escape_html] = false
+Haml::Template.options[:escape_attrs] = false
+
+module HamlInitializer
+  def initialize
+    super
+    @options[:escape_attrs] = false
+  end
+end
+
+class Haml::Engine
+  def initialize_with_new(*args)
+    initialize_without_new *args
+    @options[:escape_attrs] = false
+  end
+  alias :initialize_without_new :initialize
+  alias :initialize :initialize_with_new
+end
 
 # CodeRay syntax highlighting in Haml
 # First: gem install haml-coderay
