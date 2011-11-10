@@ -1,9 +1,9 @@
 - content_for :head do
   %title The Middleman!
-  = javascript_include_tag :jquery, :underscore, :backbone, :'backbone-local-storage', :app 
+  = javascript_include_tag :jquery, :'jquery-ui-1.8.16.custom.min', :underscore, :backbone, :'backbone-local-storage', :app 
 
 %script#item-template{:type => "text/backbone-template"}
-  %article{class: "<%= done ? 'done' : '' %>"}
+  %article{:class => "<%= done ? 'done' : '' %>"}
     <% if(done) { %>
     %input.check{type: "checkbox", checked: "checked"}
     <% } else { %>

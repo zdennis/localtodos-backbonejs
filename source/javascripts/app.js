@@ -15,7 +15,7 @@ $(function(){
   window.TodoList = Backbone.Collection.extend({
     model: Todo,
     localStorage: new Store("todos"),
-
+    
     done: function(){
       return this.filter(function(todo){ return todo.get("done"); });
     },
@@ -31,6 +31,12 @@ $(function(){
     
     comparator: function(todo){
       return todo.get("order");
+    },
+    
+    reorder: function(cids){
+      _.each(cids, function(cid, index){
+        this.get(cid).save({order: index});
+      }, this);
     }
   });
 
@@ -54,7 +60,7 @@ $(function(){
     },
     
     render: function(){
-      $(this.el).html(this.template(this.model.toJSON()));
+      $(this.el).attr("data-cid", this.model.id).html(this.template(this.model.toJSON()));
       this.setText();
       return this;
     },
@@ -102,9 +108,16 @@ $(function(){
     statsTemplate: _.template($("#stats-template").html()),
     
     events: {
-      "keypress #new-todo":    "createOnEnter",
-      "keyup #new-todo":       "showTooltip",
-      "click .todo-clear a":   "clearCompleted"
+      "keypress #new-todo":       "createOnEnter",
+      "keyup #new-todo":          "showTooltip",
+      "click .todo-clear a":      "clearCompleted",
+      "sortupdate ul#todo-list" : "sortUpdate"
+    },
+    
+    sortUpdate: function(e, ui){
+      var items = $(ui.item).siblings().andSelf(),
+          cids  = _.map(items, function(e){ return $(e).data('cid') });
+      Todos.reorder(cids);
     },
     
     initialize: function(){
@@ -122,6 +135,8 @@ $(function(){
         done:      Todos.done().length,
         remaining: Todos.remaining().length
       }));
+
+      this.$("ul#todo-list").sortable();
     },
     
     addOne: function(todo){
